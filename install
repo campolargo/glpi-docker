@@ -1,0 +1,21 @@
+#!/usr/bin/sh
+
+VERSION=$(wget -q https://api.github.com/repos/glpi-project/glpi/releases/latest -O - | grep -m 1 '^  "tag_name": "' | cut -d '"' -f 4)
+wget -q --show-progress https://github.com/glpi-project/glpi/releases/download/${VERSION}/glpi-${VERSION}.tgz
+tar -zxf glpi-${VERSION}.tgz
+cp downstream.php glpi/inc/
+cp local_define.php glpi/config/
+mv glpi/config/ .
+mv glpi/files/ .
+mkdir logs/
+mkdir mariadb/
+echo 'Access the Web interface to complete installation'
+
+read -p 'Finishing installation, proceed? [y/N]' yn
+
+if [ "$yn" != y -a "$yn" != Y ]; then
+    exit
+fi
+
+# Remove install directory
+sudo rm -rf glpi/install/
