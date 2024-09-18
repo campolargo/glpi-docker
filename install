@@ -19,6 +19,7 @@ set -e
 VERSION=$(wget -q https://api.github.com/repos/glpi-project/glpi/releases/latest -O - | grep -m 1 '^  "tag_name": "' | cut -d '"' -f 4)
 wget -q --show-progress https://github.com/glpi-project/glpi/releases/download/${VERSION}/glpi-${VERSION}.tgz
 tar -zxf glpi-${VERSION}.tgz
+rm glpi-${VERSION}.tgz
 cp downstream.php glpi/inc/
 cp local_define.php glpi/config/
 mv glpi/config/ .
