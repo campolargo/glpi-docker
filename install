@@ -28,7 +28,7 @@ mkdir logs/
 mkdir mariadb/
 docker compose up -d
 echo 'Access the Web interface to complete installation'
-read -p 'Finishing installation, proceed? [y/N]' yn
+read -p 'Web installation complete? [y/N]' yn
 
 if [ "$yn" != y -a "$yn" != Y ]; then
     exit
