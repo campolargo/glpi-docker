@@ -24,6 +24,7 @@ services:
         restart: always
         volumes:
           - ./mariadb/:/var/lib/mysql/:Z
+          - ./glpi.sql:/docker-entrypoint-initdb.d/glpi.sql:ro
         environment:
             MARIADB_USER: glpi
             MARIADB_PASSWORD: <password>
