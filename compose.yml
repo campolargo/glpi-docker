@@ -15,6 +15,7 @@ services:
         volumes:
           - ./glpi.ini:/usr/local/etc/php/conf.d/glpi.ini:ro
           - ./glpi/:/var/www/glpi/
+          - ./marketplace/:/var/www/glpi/marketplace/
           - ./config/:/etc/glpi/
           - ./files/:/var/lib/glpi/
           - ./logs/:/var/log/glpi/
