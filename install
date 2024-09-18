@@ -37,3 +37,8 @@ fi
 docker exec -it glpi_php php /var/www/glpi/bin/console database:enable_timezones
 docker compose down
 rm -rf glpi/install/
+sed -i 's|/var/www/glpi/$|/var/www/glpi/:ro|; s|/etc/glpi/$|/etc/glpi/:ro|' compose.yml
+docker compose up -d
+sudo tee -a /etc/crontab > /dev/null << EOF
+* * * * * $USER docker exec glpi_php php /var/www/glpi/front/cron.php > /dev/null 2>&1
+EOF
