@@ -25,6 +25,7 @@ cp local_define.php glpi/config/
 mv glpi/config/ .
 mv glpi/files/ .
 mv glpi/marketplace/ .
+mv glpi/plugins/ .
 mkdir logs/
 mkdir mariadb/
 docker compose up -d
