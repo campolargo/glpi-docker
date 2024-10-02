@@ -17,6 +17,7 @@ services:
           - ./glpi/:/var/www/glpi/
           - ./config/:/etc/glpi/
           - ./marketplace/:/var/www/glpi/marketplace/
+          - ./plugins/:/var/www/glpi/plugins/
           - ./files/:/var/lib/glpi/
           - ./logs/:/var/log/glpi/
     mariadb:
