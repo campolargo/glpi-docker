@@ -6,27 +6,27 @@ services:
         ports:
           - 80:80
         volumes:
-          - glpi.conf:/etc/nginx/conf.d/default.conf:ro
+          - ./glpi.conf:/etc/nginx/conf.d/default.conf:ro
     php:
         container_name: glpi_php
         build: .
         restart: always
         user: 1000:1000
         volumes:
-          - glpi.ini:/usr/local/etc/php/conf.d/glpi.ini:ro
-          - glpi/:/var/www/glpi/
-          - config/:/etc/glpi/
-          - marketplace/:/var/www/glpi/marketplace/
-          - plugins/:/var/www/glpi/plugins/
-          - files/:/var/lib/glpi/
-          - logs/:/var/log/glpi/
+          - ./glpi.ini:/usr/local/etc/php/conf.d/glpi.ini:ro
+          - ./glpi/:/var/www/glpi/
+          - ./config/:/etc/glpi/
+          - ./marketplace/:/var/www/glpi/marketplace/
+          - ./plugins/:/var/www/glpi/plugins/
+          - ./files/:/var/lib/glpi/
+          - ./logs/:/var/log/glpi/
     mariadb:
         container_name: glpi_mariadb
         image: mariadb:latest
         restart: always
         volumes:
-          - mariadb/:/var/lib/mysql/:Z
-          - glpi.sql:/docker-entrypoint-initdb.d/glpi.sql:ro
+          - ./mariadb/:/var/lib/mysql/:Z
+          - ./glpi.sql:/docker-entrypoint-initdb.d/glpi.sql:ro
         environment:
             MARIADB_USER: glpi
             MARIADB_PASSWORD: <password>
