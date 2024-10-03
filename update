@@ -1,0 +1,41 @@
+#!/usr/bin/sh
+
+# Copyright 2024 Prefeitura Municipal de Campo Largo <analistas@campolargo.pr.gov.br>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -e
+
+OLD_VERSION=$(ls glpi/version/)
+NEW_VERSION=$(wget -q https://api.github.com/repos/glpi-project/glpi/releases/latest -O - | grep -m 1 '^  "tag_name": "' | cut -d '"' -f 4)
+
+if [ ${OLD_VERSION} = ${NEW_VERSION} ]; then
+    echo "GLPI ${NEW_VERSION} is already the latest version"
+    exit
+fi
+
+wget -q --show-progress https://github.com/glpi-project/glpi/releases/download/${NEW_VERSION}/glpi-${NEW_VERSION}.tgz
+docker exec glpi_php php /var/www/glpi/bin/console glpi:maintenance:enable
+docker compose down
+rm -rf glpi/
+tar -zxf glpi-${NEW_VERSION}.tgz
+rm glpi-${NEWVERSION}.tgz
+cp downstream.php glpi/inc/
+rm -rf glpi/config/
+rm -rf glpi/files/
+rm -rf glpi/marketplace/
+rm -rf glpi/plugins/
+docker compose up -d
+docker exec glpi_php php /var/www/glpi/bin/console db:update
+docker exec glpi_php php /var/www/glpi/bin/console glpi:maintenance:disable
+rm -rf glpi/install/
