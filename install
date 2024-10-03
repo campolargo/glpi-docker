@@ -36,9 +36,9 @@ if [ "$yn" != y -a "$yn" != Y ]; then
     exit
 fi
 
+rm -rf glpi/install/
 docker exec glpi_php php /var/www/glpi/bin/console database:enable_timezones
 docker compose down
-rm -rf glpi/install/
 sed -i 's|/var/www/glpi/$|/var/www/glpi/:ro|; s|/etc/glpi/$|/etc/glpi/:ro|' compose.yml
 docker compose up -d
 sudo tee -a /etc/crontab > /dev/null << EOF
