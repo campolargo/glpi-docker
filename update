@@ -33,8 +33,6 @@ rm glpi-${NEWVERSION}.tgz
 cp downstream.php glpi/inc/
 rm -rf glpi/config/
 rm -rf glpi/files/
-rm -rf glpi/marketplace/
-rm -rf glpi/plugins/
 docker compose up -d
 docker exec glpi_php php /var/www/glpi/bin/console db:update
 docker exec glpi_php php /var/www/glpi/bin/console glpi:maintenance:disable
