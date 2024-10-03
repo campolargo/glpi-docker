@@ -29,7 +29,7 @@ docker exec glpi_php php /var/www/glpi/bin/console glpi:maintenance:enable
 docker compose down
 rm -rf glpi/
 tar -zxf glpi-${NEW_VERSION}.tgz
-rm glpi-${NEWVERSION}.tgz
+rm glpi-${NEW_VERSION}.tgz
 cp downstream.php glpi/inc/
 rm -rf glpi/config/
 rm -rf glpi/files/
