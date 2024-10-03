@@ -28,7 +28,7 @@ mkdir marketplace/
 mkdir plugins/
 mkdir logs/
 mkdir mariadb/
-docker compose up -d
+docker compose up -d --wait
 echo 'Access the Web interface to complete installation'
 read -p 'Web installation complete? [y/N]' yn
 
@@ -40,7 +40,7 @@ rm -rf glpi/install/
 docker exec glpi_php php /var/www/glpi/bin/console database:enable_timezones
 docker compose down
 sed -i 's|/etc/glpi/$|/etc/glpi/:ro|' compose.yml
-docker compose up -d
+docker compose up -d --wait
 sudo tee -a /etc/crontab > /dev/null << EOF
 * * * * * $USER docker exec glpi_php php /var/www/glpi/front/cron.php > /dev/null 2>&1
 EOF
