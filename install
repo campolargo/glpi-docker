@@ -24,8 +24,8 @@ cp downstream.php glpi/inc/
 cp local_define.php glpi/config/
 mv glpi/config/ .
 mv glpi/files/ .
-mv glpi/marketplace/ .
-mv glpi/plugins/ .
+mkdir marketplace/
+mkdir plugins/
 mkdir logs/
 mkdir mariadb/
 docker compose up -d
@@ -39,7 +39,7 @@ fi
 rm -rf glpi/install/
 docker exec glpi_php php /var/www/glpi/bin/console database:enable_timezones
 docker compose down
-sed -i 's|/var/www/glpi/$|/var/www/glpi/:ro|; s|/etc/glpi/$|/etc/glpi/:ro|' compose.yml
+sed -i 's|/etc/glpi/$|/etc/glpi/:ro|' compose.yml
 docker compose up -d
 sudo tee -a /etc/crontab > /dev/null << EOF
 * * * * * $USER docker exec glpi_php php /var/www/glpi/front/cron.php > /dev/null 2>&1
