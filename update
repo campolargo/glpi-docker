@@ -33,7 +33,7 @@ rm glpi-${NEW_VERSION}.tgz
 cp downstream.php glpi/inc/
 rm -rf glpi/config/
 rm -rf glpi/files/
-docker compose up -d
+docker compose up -d --wait
 docker exec glpi_php php /var/www/glpi/bin/console db:update
 docker exec glpi_php php /var/www/glpi/bin/console glpi:maintenance:disable
 rm -rf glpi/install/
