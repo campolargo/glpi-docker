@@ -10,6 +10,7 @@ services:
     php:
         container_name: glpi_php
         build: .
+        image: glpi_php
         restart: always
         user: 1000:1000
         volumes:
