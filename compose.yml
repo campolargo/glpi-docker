@@ -31,6 +31,6 @@ services:
           - ./glpi.sql:/docker-entrypoint-initdb.d/glpi.sql:ro
         environment:
             MARIADB_USER: glpi
-            MARIADB_PASSWORD: <password>
+            MARIADB_PASSWORD: "${MARIADB_PASSWORD}"
             MARIADB_DATABASE: glpi
-            MARIADB_ROOT_PASSWORD: <password>
+            MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
