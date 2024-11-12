@@ -7,6 +7,8 @@ services:
           - 80:80
         volumes:
           - ./glpi.conf:/etc/nginx/conf.d/default.conf:ro
+        depends_on:
+          - php
     php:
         container_name: glpi_php
         pull_policy: never
@@ -22,6 +24,8 @@ services:
           - ./plugins/:/var/www/glpi/plugins/
           - ./files/:/var/lib/glpi/
           - ./logs/:/var/log/glpi/
+        depends_on:
+          - mariadb
     mariadb:
         container_name: glpi_mariadb
         image: mariadb:latest
