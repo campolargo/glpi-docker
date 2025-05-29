@@ -25,7 +25,7 @@ if [ ${OLD_VERSION} = ${NEW_VERSION} ]; then
 fi
 
 wget -q --show-progress https://github.com/glpi-project/glpi/releases/download/${NEW_VERSION}/glpi-${NEW_VERSION}.tgz
-docker exec glpi_php php /var/www/glpi/bin/console glpi:maintenance:enable
+docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:enable
 docker compose down
 rm -rf glpi/
 tar -zxf glpi-${NEW_VERSION}.tgz
@@ -34,6 +34,6 @@ cp downstream.php glpi/inc/
 rm -rf glpi/config/
 rm -rf glpi/files/
 docker compose up -d --wait
-docker exec glpi_php php /var/www/glpi/bin/console db:update
-docker exec glpi_php php /var/www/glpi/bin/console glpi:maintenance:disable
+docker compose exec php php /var/www/glpi/bin/console db:update
+docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:disable
 rm -rf glpi/install/
