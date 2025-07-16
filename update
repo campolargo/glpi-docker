@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-# Copyright 2024 Prefeitura Municipal de Campo Largo <analistas@campolargo.pr.gov.br>
+# Copyright 2024, 2025 Prefeitura Municipal de Campo Largo <analistas@campolargo.pr.gov.br>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ cp downstream.php glpi/inc/
 rm -rf glpi/config/
 rm -rf glpi/files/
 docker compose up -d --wait
+sleep 10
 docker compose exec php php /var/www/glpi/bin/console db:update
 docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:disable
 rm -rf glpi/install/
