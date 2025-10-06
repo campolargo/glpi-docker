@@ -24,7 +24,6 @@ cp downstream.php glpi/inc/
 cp local_define.php glpi/config/
 mv glpi/config/ .
 mv glpi/files/ .
-mkdir marketplace/
 mkdir plugins/
 mkdir logs/
 mkdir mariadb/
