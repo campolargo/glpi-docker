@@ -36,3 +36,4 @@ rm -rf glpi/files/
 docker compose up -d --wait
 docker compose exec php php /var/www/glpi/bin/console db:update
 docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:disable
+echo 'Remember to resume execution of plugins'
