@@ -34,6 +34,5 @@ cp downstream.php glpi/inc/
 rm -rf glpi/config/
 rm -rf glpi/files/
 docker compose up -d --wait
-sleep 10
 docker compose exec php php /var/www/glpi/bin/console db:update
 docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:disable
