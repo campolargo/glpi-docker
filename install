@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 # Copyright 2024, 2025 Prefeitura Municipal de Campo Largo <analistas@campolargo.pr.gov.br>
 #
@@ -24,7 +24,6 @@ cp downstream.php glpi/inc/
 cp local_define.php glpi/config/
 mv glpi/config/ .
 mv glpi/files/ .
-mkdir marketplace/
 mkdir plugins/
 mkdir logs/
 mkdir mariadb/
@@ -36,8 +35,6 @@ if [ "$yn" != y -a "$yn" != Y ]; then
     exit
 fi
 
-rm -rf glpi/install/
-docker compose exec php php /var/www/glpi/bin/console database:enable_timezones
 docker compose down
 sed -i 's|/etc/glpi/$|/etc/glpi/:ro|' compose.yml
 docker compose up -d --wait
