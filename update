@@ -37,4 +37,3 @@ docker compose up -d --wait
 sleep 10
 docker compose exec php php /var/www/glpi/bin/console db:update
 docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:disable
-rm -rf glpi/install/
