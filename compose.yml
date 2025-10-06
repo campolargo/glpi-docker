@@ -24,7 +24,8 @@ services:
           - ./files/:/var/lib/glpi/files/
           - ./logs/:/var/log/glpi/
         depends_on:
-          - mariadb
+            mariadb:
+                condition: service_healthy
     mariadb:
         container_name: glpi_mariadb
         image: mariadb:latest
@@ -36,3 +37,9 @@ services:
             MARIADB_PASSWORD: "${MARIADB_PASSWORD}"
             MARIADB_DATABASE: glpi
             MARIADB_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
+        healthcheck:
+            test: mariadb-admin ping -h 127.0.0.1 -u glpi --password="${MARIADB_PASSWORD}"
+            start_period: 5s
+            interval: 5s
+            timeout: 5s
+            retries: 10
