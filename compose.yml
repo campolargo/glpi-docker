@@ -20,9 +20,8 @@ services:
           - ./glpi.ini:/usr/local/etc/php/conf.d/glpi.ini:ro
           - ./glpi/:/var/www/glpi/:ro
           - ./config/:/etc/glpi/
-          - ./marketplace/:/var/www/glpi/marketplace/
-          - ./plugins/:/var/www/glpi/plugins/
-          - ./files/:/var/lib/glpi/
+          - ./plugins/:/var/lib/glpi/plugins/
+          - ./files/:/var/lib/glpi/files/
           - ./logs/:/var/log/glpi/
         depends_on:
           - mariadb
