@@ -27,6 +27,13 @@ fi
 wget -q --show-progress https://github.com/glpi-project/glpi/releases/download/${NEW_VERSION}/glpi-${NEW_VERSION}.tgz
 docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:enable
 docker compose down
+echo 'Remember to take snapshot'
+read -p 'Continue? [y/N]' yn
+
+if [ "$yn" != y -a "$yn" != Y ]; then
+    exit
+fi
+
 rm -rf glpi/
 tar -zxf glpi-${NEW_VERSION}.tgz
 rm glpi-${NEW_VERSION}.tgz
