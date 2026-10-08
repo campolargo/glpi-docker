@@ -24,6 +24,13 @@ if [ ${OLD_VERSION} = ${NEW_VERSION} ]; then
     exit
 fi
 
+echo "Updating GLPI ${OLD_VERSION} -> ${NEW_VERSION}"
+read -p 'Continue? [y/N]' yn
+
+if [ "$yn" != y ] && [ "$yn" != Y ]; then
+    exit
+fi
+
 wget -q --show-progress https://github.com/glpi-project/glpi/releases/download/${NEW_VERSION}/glpi-${NEW_VERSION}.tgz
 docker compose exec php php /var/www/glpi/bin/console glpi:maintenance:enable
 docker compose down
